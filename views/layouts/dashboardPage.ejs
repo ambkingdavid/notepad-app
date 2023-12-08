@@ -7,13 +7,13 @@
   <script src="https://cdn.tailwindcss.com" defer></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js" defer></script>
-
   
   <title><%- locals.title %></title>
   <meta name="description" content="<%- locals.description %>">
 </head>
 
-<body class="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500">
+<body class="">
+  <%- include('../partials/dashboardHeader.ejs') %>
 
     <%- body %>
         

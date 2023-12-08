@@ -7,7 +7,10 @@ class IndexController {
       description: 'A NotePad Application',
     }
 
-    res.render('index', locals)
+    res.render('index', {
+      locals,
+      layout: '../views/layouts/homepage',
+    })
   }
 
   static async about(req, res) {
@@ -16,7 +19,10 @@ class IndexController {
       description: 'A NotePad Application',
     }
 
-    res.render('about', locals);
+    res.render('about', {
+      locals,
+      layout: '../views/layouts/homepage'
+    });
   }
 }
 
