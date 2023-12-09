@@ -7,6 +7,8 @@ import session from 'express-session';
 import passport from 'passport';
 import expressEjsLayouts from 'express-ejs-layouts';
 import SessionStore from 'connect-mongo';
+import morgan from 'morgan';
+import methodOverride from 'method-override';
 
 // files import
 import mongoClient from './config/db.js';
@@ -25,6 +27,8 @@ const port = process.env.PORT;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride('_method'));
+app.use(morgan('dev'));
 
 app.use(
   session({
