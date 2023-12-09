@@ -1,4 +1,5 @@
 import express from 'express';
+import { Types } from 'mongoose';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import passport from 'passport';
 import dotenv from 'dotenv'
@@ -47,21 +48,19 @@ router.get('/logout', (req, res, next) => {
       console.log(err);
       res.send('Error Logging Out');
     } else {
-      res.render('index', {
-	layout: '../views/layouts/homepage',
-      });
+      res.redirect('/');
     }
   });
 });
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, {id: user.id});
 });
 
-passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id);
-  if (user) {
-    done(null, user);
+passport.deserializeUser(async (user, done) => {
+  const obj = await User.findById(user.id);
+  if (obj) {
+    done(null, obj);
   }
 });
 
