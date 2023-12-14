@@ -1,30 +1,77 @@
-<div class="border border-5 border-sky-500 px-6 pt-20 pb-5 h-screen sm:ml-64">
-    <div
-        class="min-h-[90%] max-w-4xl pt-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+<div id="viewNote" class="px-6 pt-20 pb-5 h-screen sm:ml-64 relative">
 
-        <h3
-            class="text-center mb-2 text-base md:text-lg lg:text-1xl xl:text-3xl font-bold text-gray-900 dark:text-white">
-            <%= note.title %>
-        </h3>
-        <div class="grid grid-rows-1">
-            <p class="mb-3 p-5 font-normal text-gray-700 dark:text-gray-400">
-                <%= note.content %>.
-            </p>
 
+    <div id="edit-btn" class="flex justify-center">
+        <div
+            class="relative w-full max-h-full  p-6 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700">
+            <a href="/dashboard">
+                <svg class="absolute top-3 right-3 w-3 h-3 lg:w-5 lg:h-5 transition duration-75 text-gray-800 dark:text-white"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+            </a>
+            <div class="flex flex-row flex-nowrap justify-center relative">
+                <h3
+                    class=" text-center mb-2 text-base text-center md:text-lg lg:text-1xl xl:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <%= note.title %>
+                </h3>
+
+            </div>
+            <div>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    <%= note.content %>.
+                </p>
+            </div>
+            <div class="absolute bottom-0 right-0">
+                <span class="text-xs align-text-bottom">
+                    created: <%= note.createdAt%>.
+                </span>
+            </div>
         </div>
     </div>
-    <form action="/dashboard/note/<%= note._id %>?_method=GET" method="POST"
-        class="flex flex-row justify-end min-h-[9%]">
 
-        <button type="button"
-            class="my-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">
+
+    <div id="edit-btn" class="flex flex-row justify-end my-3 absolute bottom-0 right-0">
+
+        <button type="button" data-dismiss-target="#viewNote" data-collapse-toggle="editNote"
+            class="my-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-3 py-1 text-center me-2 mb-2 ">
             edit
         </button>
-        <!-- <a href="/dashboard/note/" class="my-auto me-2 mb-2 ">
-            <button type="button"
-                class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
-                close
+
+        <form action="/dashboard/note/<%= note._id %>?_method=DELETE" method="POST" class="">
+            <button type="submit"
+                class="my-auto text-white bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-3 py-1 text-center me-2 mb-2 ">
+                delete
             </button>
-        </a> -->
-    </form>
+        </form>
+    </div>
+</div>
+
+<div id="editNote" class="flex justify-center pt-20 pb-5 h-screen sm:ml-64 relative hidden border border-red-700">
+    <div class="max-h-full w-11/12 md:w-3/4">
+        <form action="/dashboard/note/<%= note._id %>?_method=PUT" method="POST" class="shadow-2xl">
+            <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                <div class="flex items-center justify-between border-b dark:border-gray-600">
+                    <input name="title" type="text" id="first_name" value="<%= note.title %>"
+                        class="text-center bg-gray-200 text-gray-900 font-bold text-xl block w-full p-2.5 dark:bg-gray-700  dark:placeholder-gray-400 dark:text-white placeholder-gray-500"
+                        placeholder="title..." required>
+                </div>
+                <div
+                    class="relative w-full h-[390px] bg-blue border border-gray-200 overflow-hidden my-0 mx-auto shadow-xl dark:bg-gray-800 dark:border-gray-700">
+                    <div class="absolute top-0 right-0 bottom-0 left-0"
+                        style="background: linear-gradient(transparent, transparent 28px, black 28px); background-size: 30px 30px;">
+                        <textarea name="content" rows=""
+                            class="w-full h-full max-h-full max-w-full leading-[30px] py-0 px-2 bg-transparent box-border border-none resize-none z-10"><%= note.content %></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-row justify-end my-3 absolute bottom-0 right-0">
+                <button type="submit"
+                    class="my-auto text-white bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-3 py-1 text-center me-2 mb-2 ">
+                    save
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
