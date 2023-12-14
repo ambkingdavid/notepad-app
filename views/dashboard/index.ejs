@@ -4,33 +4,39 @@
             Notes
         </h3>
     </div>
-    <ul class="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         <% for (let i=0; i < notes.length; i++) { %>
-            <li class="h-50">
+            <li class="h-56 mb-5">
                 <div
-                    class="h-full max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-
-                    <h3
-                        class="truncate mb-2 text-base md:text-lg lg:text-1xl xl:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        <%= notes[i].title %>
-                    </h3>
-
-                    <p class="line-clamp-3 mb-3 font-normal text-gray-700 dark:text-gray-400">
-                        <%= notes[i].content %>.
-                    </p>
-                    <form action="/dashboard/note/<%= notes[i]._id %>?_method=GET" method="POST"
-                        class="flex flex-row  justify-between">
-
-                        <button type="submit"
-                            class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">
-                            Open
-                        </button>
-
-                        <span class="text-xs text-end">
-                            <%= notes[i].time%>.
-                        </span>
-                    </form>
+                    class="h-full relative max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div>
+                        <h3
+                            class="truncate mb-2 text-base md:text-lg lg:text-1xl xl:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            <%= notes[i].title %>
+                        </h3>
+                    </div>
+                    <div>
+                        <p class="line-clamp-3 mb-3 font-normal text-gray-700 dark:text-gray-400">
+                            <%= notes[i].content %>.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 w-11/12">
+                        <div class="flex justify-between">
+                            <div>
+                                <span class="text-xs align-text-bottom text-end">
+                                    updated: <%= notes[i].time%>.
+                                </span>
+                            </div>
+                            <form action="/dashboard/note/<%= notes[i]._id %>?_method=GET" method="POST" class="">
+                                <button type="submit"
+                                    class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-3 py-1 lg:px-5 lg:py-2.5 text-center me-2 mb-2 ">
+                                    Open
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
+
             </li>
             <% } %>
     </ul>
@@ -57,7 +63,7 @@
                 <!-- Buttons -->
                 <div class="inline-flex mt-2 xs:mt-0">
                     <% if (page !==1) { %>
-                        <a href="/dashboard?page=<%= Math.max(1, page - 1) %>">
+                        <a href="/dashboard?page=<%= Math.max(1, page - 1) %>" class="mr-2">
                             <button
                                 class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                 Prev
