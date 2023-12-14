@@ -6,7 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com" defer></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/main.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js" defer></script>
+  <script src="/js/main.js" defer></script>
+  <style>
+    .lined-textarea {
+      border: 1px solid #ccc; /* Optional border for the textarea */
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 18px,
+        #ddd 18px,
+        #ddd 19px
+      );
+      /* Adjust padding as needed */
+      font-family: monospace; /* Optional: Use a monospaced font for better alignment */
+    }
+  </style>
   
   <title><%- locals.title %></title>
   <meta name="description" content="<%- locals.description %>">
@@ -16,8 +32,6 @@
   <%- include('../partials/dashboardHeader.ejs') %>
 
     <%- body %>
-        
-      <script src="/js/main.js"></script>
 </body>
 
 </html>
